@@ -1,0 +1,98 @@
+
+(image)
+
+Ce billet de blogue a été écrit avec l'éditeur de texte (Stylo).
+
+Un besoin (titre2)
+
+En 2015, après une quinzaine d'années passées à me battre pour trouver une solution convenable pour écrire des textes scientifiques, j'entamais une réflexion sur la création d'un éditeur de textes pour les sciences humaines et sociales (Vitali-Rosati 2015). Le constat était simple: il n'y a pas une solution adaptée aux besoin de l'écriture savante d'aujourd'hui. La totalité des options existantes est orientée impression et il devient impossible de produire facilement un texte qui ait un sens par rapport aux exigences de structuration typiques du numérique. J'ai toujours été un fan de LaTeX, mais il reste orienté impression et ne permet pas un balisage sémantique. Bien sûr, on peut écrire directement en XML, mais au prix d'une écriture un peu lourde qui implique la perte de la fluidité nécessaire lorsqu'on produit un texte.
+
+Les outils d'écriture conditionnent la pensée, comme le font comprendre bien les différentes analyses sur ces questions, dont celle de Goody (Goody 1979) est l'une des plus fortes. Ce sont les chercheurs eux-mêmes qui doivent se poser la question et chercher des solutions s'ils ne veulent pas être simplement passifs devant les offres du marché (Vitali-Rosati 2018). Word a complètement monopolisé l'écriture et les conséquences sont catastrophiques(1).
+
+Le projet Stylo (titre2)
+
+À partir de ce constat, j'ai entrepris, avec (mon équipe) - en particulier Nicolas Sauret, Servanne Monjour et Arthur Juchereau - une réflexion sur ce que devait être un éditeur de textes pour répondre aux besoins spécifiques de l'écriture en SHS. Cette réflexion est devenue un projet: la réalisation de Stylo. Le travail a été long, beaucoup plus que prévu. Le problème principal n'était pas technique, mais plutôt théorique: quelles caractéristiques devait avoir un outil de ce type? Nous avons exploré plusieurs pistes.
+
+Les besoins identifiés étaient les suivants:
+
+1. L'éditeur doit être sémantique. Les compétences que nous avons en tant qu'auteurs sont des compétences sémantiques et non graphiques. Dans le domaine de l'imprimé, nous avons appris - plus ou moins - à traduire ces compétences en connaissances graphiques: par exemple, un titre sera plus grand, ou en italique, lorsqu'il s'agit d'une référence. Ces connaissances graphiques sont très complexes à mettre en place et surtout diffèrent selon les éditeurs. D'une part, les auteurs perdent beaucoup de temps à les maîtriser et à les déployer lors de l'écriture et, de l'autre, à la fin du processus le balisage sémantique devient extrêmement pauvre. Or, avec la multiplication des documents en ligne, il devient nécessaire de pouvoir baliser le texte de façon plus fine: avoir des métadonnées alignées et fiables, mais aussi pouvoir baliser le corps du texte pour définir la fonction de ses parties (thèses, hypothèses, définitions, concept-clés, exemples, etc.).
+2. L'éditeur doit être simple d'usage. La nécessite de simplicité dérive du besoin d'avoir une écriture fluide et rapide. En SHS, souvent, on pense en écrivant. Il n'est pas possible d'interrompre l'écriture pour insérer des balises complexes, ni, en réalité, pour déplacer la souri dans tous les sens à la recherche de la fonction souhaitée. En outre, plusieurs chercheurs en SHS ne sont pas prêts à dépenser trop de temps pour apprendre de nouveaux outils.
+3. L'éditeur doit être compatible avec d'autres formes d'écriture. On ne peut pas - et on ne veut pas - créer un monopole. On veut que l'usage de l'éditeur puisse se raccorder à d'autres formes d'écriture existantes et que les auteurs puissent, lorsqu'ils veulent, sortir de l'environnement pour continuer à écrire ailleurs en conservant toute la richesse de leur travail. L'éditeur doit donc être basé sur des standards, ce qui permet aussi d'éviter le risque d’obsolescence, outre que d'éviter les écueils liés à des formats clos ou propriétaires.
+4. L'éditeur doit avoir plusieurs sorties différentes et adaptables aux besoins spécifiques de chaque auteur et de chaque revue. Les textes doivent pouvoir circuler en environnements différents: imprimés, numériques plus ou moins scientifiques, avec des mises en formes différentes. Le temps perdu par les auteurs à remettre en forme leurs textes pour les adapter aux demandes des éditeurs est inacceptable à une époque où les machines peuvent réaliser sans problème ce travail.
+5. L'éditeur doit être lowtech - car autrement il serait impossible de le maintenir
+
+Stylo est disponible - et ça fonctionne ! (titre2)
+
+Après trois ans de travail, Stylo est sorti en version béta. (Il est en ligne et ouvert aux usagers). (Une première version de la documentation est disponible). Voici les choix de fond qui ont été faits :
+
+- Un éditeur basé sur markdown + yaml + bibtex
+- Un éditeur basé sur une chaîne de conversion pandoc
+- Un éditeur qui a comme format pivot HTML
+
+Nous croyons qu'il répond aux exigences listées. Voici comment
+
+1. (Sémantique). Stylo permets:
+
+- de produire des métadonnées riches et customisables, alignées avec des autorités.
+- stylo permet de baliser le corps du texte en spécifiant la fonction sémantique des mots ou des phrases. Par exemple, cette phrase est un exemple et cette fonction est exprimée dans le texte avec une classe attribuée au span qui contient cette partie du texte.. Vous pouvez le voir en affichant le code html.
+- Stylo permet d'utiliser une sémantique ouverte et customisable et de créer facilement des structures de balisage du document personnalisées, sans être lié à un schéma prédéfini - comme dans le cas du xml (ce qui justifie le choix du html comme format pivot)
+
+2. (Simplicité). Écrire en markdown demande la maîtrise d'une syntaxe très simple et en même temps très puissante. L'écriture reste très fluide car on a besoin de très peu de balises qui sont aussi très "naturelles" (pas besoin de se servir de la souri et pas besoin de connaitre une syntaxe complexe). Nous allons aussi bientôt intégrer un environnement graphique qui permet, à ceux qui le souhaitent de continuer à se servir de la souri et de ne pas devoir écrire les balises.
+3. (Compatibilité). Stylo est basé sur une chaîne qui peut être gérée en déhors de son environnement: il suffit de se servr d'un éditeur de textes quelconque et de gérer ensuite la chaîne avec pandoc - ce que plusieurs chercheurs font déjà.
+4. (Plusieurs sorties). Stylo, grâce à pandoc et à des transformations xslt, permet une infinité de sorties: html, xml - avec différents schémas -, pdf et même, si vraiment nécessaire, docx ou rtf. On peut appliquer différents styles de citation selon les exigences des différents éditeurs
+5. (Lowtech). Stylo est basé sur du texte et une chaîne déjà existante: il est très facile de le maintenir et d'utiliser les textes à l'extérieur de l'environnement.
+
+Les fonctionnalités de Stylo (titre2)
+
+Voici une liste de fonctionnalités de Stylo:
+
+- Métadonnées sémantiques: un éditeur de métadonnées permet d'éditer titre, date de publication, auteurs, mots-clés etc. Ces informations peuvent être alignées avec des référentiels (pour les mots-clés, les référentiels sont récupérés automatiquement)
+- Balisage sémantique intra-textuel, à l'aide de la syntaxe markdown
+- Versionnage: tout document est versionné. L'usager peut décider si sauvegarder dans une version mineure (par exemple, la première version sera 0.1) ou majeure (1.0, 2.0 etc.)
+- Sauvegarde automatique: pendant l'écriture le document est sauvegardé automatiquement
+- Possibilité d'annoter chaque version en la visualisant en html
+- Exports vers html, xml (pour l'instant seulement le schéma eruditarticle, mais TEI va être bientôt disponible)
+- Sommaire automatique de l'article
+- Bibliographie structurée via bibtex - bientôt sera disponible l'usage de Zotero
+- Partage du document avec d'autres usagers
+- d'autres magnifiques fonctions - comme les statistiques sur le nombre de mots, de citations, etc.
+
+Ce qui nous reste à faire (titre2)
+
+Certaines fonctionnalités sont déjà en train d'être testées et devraient être ajoutées rapidement:
+
+- un outil de suivi de modification
+- la synchronisation avec Zotero
+- l'export en PDF et en TEI
+- l'importation depuis docx et d'autres formats
+- l'implémentation d'un correcteur orthographique
+
+D'autres fonctionnalités sont prévues, mais encore en cours de développement:
+
+- un éditeur complètement visuel
+- une version standalone de l'éditeur
+- des pipelines automatiques pour déposer les textes sur différentes plateformes
+
+Stylo et Wordpress (titre2)
+
+J'utilise Stylo, évidemment... J'ai voulu l'utiliser pour faire un test: publier un billet de blogue. Or, rien de plus facile: grâce au plugin (HTML Import 2), il est possible de faire aspirer par Wordpress les HTMLs produits par Stylo. Wordpress récupère évidemment le corps du texte bien structuré, mais aussi le titre, la date de publication et les mots-clés. Il serait très facile de mapper plus précisément l'HTML pour que l'importation remplisse tous les champs, par exemple dans le cadre d'une revue (résumés, auteurs, place de l'article dans le site, dossier etc).
+
+Le même plugin - plus développé, existe pour (Drupal).
+
+Venez tester Stylo ! (titre2)
+
+Il est libre, il est gratuit. Et nous attendons des retours !
+
+[Testez Stylo ici](http://stylo.ecrituresnumeriques.ca/)
+
+
+Bibliographie (titre2)
+
+
+Vitali-Rosati, Marcello. 2015. « An editor for academic papers (xml, html, md, TeX, pdf and if you really need it rtf) ». BlogPost. _Culture numérique_. [http://blog.sens-public.org/marcellovitalirosati/an-editor-for-academic-papers-xml-html-md-tex-pdf-and-if-you-really-need-it-rtf/](http://blog.sens-public.org/marcellovitalirosati/an-editor-for-academic-papers-xml-html-md-tex-pdf-and-if-you-really-need-it-rtf/).
+
+———. 2018. « Les chercheurs en SHS savent-ils écrire ? » _The Conversation_. Consulté le juin 3. [http://theconversation.com/les-chercheurs-en-shs-savent-ils-ecrire-93024](http://theconversation.com/les-chercheurs-en-shs-savent-ils-ecrire-93024).
+
+* * *
+
+1. J'utilise des références bibliographiques et des notes dans ce texte, surtout pour profiter des avantages de Stylo. Je ne l'aurais pas fait dans le cadre d'un billet de blogue écrit avec l'éditeur de texte de WordPress. Mais voici la preuve que les outils conditionnent l'écriture et la pensée![↩](http://blog.sens-public.org/marcellovitalirosati/stylo/#fnref1)
